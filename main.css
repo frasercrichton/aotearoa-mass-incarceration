@@ -1,0 +1,166 @@
+.satellite-map-container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px;
+  grid-template-rows: 100% 100% 100% 100% 100% 100% 100% 100%;
+  height: 178px;
+}
+
+.satellite-map-content {
+  width: 500px;
+  height: 500px;
+}
+
+a[href^="http://maps.google.com/maps"] {
+  display: none !important;
+}
+a[href^="https://maps.google.com/maps"] {
+  display: none !important;
+}
+
+.gmnoprint a,
+.gmnoprint span,
+.gm-style-cc {
+  display: none;
+}
+.gmnoprint div {
+  background: none !important;
+}
+
+.capacity {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 200px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.year {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: xx-large;
+  text-align: center;
+}
+.capacity-count {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15em;
+}
+
+.prison-name {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  min-height: 20px;
+}
+
+.map {
+  border-style: solid;
+  border: #777;
+  text-align: center;
+}
+
+.satellite-map {
+  width: 100%;
+  height: 100%;
+}
+
+.country {
+  fill: #bfd9bf;
+}
+/*======= Map Styling ============*/
+.gmnoprint a,
+.gmnoprint span {
+  display: none;
+}
+.gmnoprint div {
+  background: none !important;
+}
+#GMapsID div div a div img {
+  display: none;
+}
+
+a[href^="http://maps.google.com/maps"] {
+  display: none !important;
+}
+
+.gmnoprint a,
+.gmnoprint span {
+  display: none;
+}
+.gmnoprint div {
+  background: none !important;
+}
+/* West Coast*/
+.unit.NZG3 {
+  fill: #f0f0f0;
+}
+/* Marlborough*/
+.unit.NZF4 {
+  fill: #f8f8f8;
+}
+/* Gisbourne*/
+.unit.NZF1 {
+  fill: #e8e8e8;
+}
+/* Nelson*/
+.unit.Nelson {
+  fill: #d8d8d8;
+}
+/* Tasman*/
+.unit.NZG4 {
+  fill: #d0d0d0;
+}
+/* Southland*/
+.unit.NZF8 {
+  fill: #c8c8c8;
+}
+
+/* Taranaki*/
+.unit.NZF9 {
+  fill: #c0c0c0;
+}
+
+/* Hawkes Bay*/
+.unit.NZF2 {
+  fill: #b8b8b8;
+}
+
+/* Northland*/
+.unit.NZF6 {
+  fill: #b0b0b0;
+}
+
+/* Otago*/
+.unit.NZF7 {
+  fill: #a8a8a8;
+}
+/* Manawatu-Wanganui*/
+.unit.NZF3 {
+  fill: #a0a0a0;
+}
+
+/*Bay of Plenty*/
+.unit.NZE8 {
+  fill: #989898;
+}
+
+/*Waikato*/
+.unit.Waikato {
+  fill: #909090;
+}
+/*Wellington*/
+.unit.Wellington {
+  fill: #888888;
+}
+
+/*Canterbury*/
+.unit.NZE9 {
+  fill: #808080;
+}
+/*Auckland*/
+.unit.NZE7 {
+  fill: #787878;
+}
+
+.unit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 2, 2;
+  stroke-linejoin: round;
+}

@@ -1,0 +1,22 @@
+{
+    "centre": {
+        "latitude": -40.7670087,
+        "longitude": 173.4506545
+    },
+    "maxBounds": [
+        [
+            -40.7670087,
+            173.450654
+        ],
+        [
+            -40.7670087,
+            173.450654
+        ]
+    ],
+    "zoom": {
+        "default": "5.75",
+        "active": "5.75",
+        "minZoomCityBlock": "5.75",
+        "maxZoomContinent": "10"
+    }
+}
