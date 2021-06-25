@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { LatLng } from 'leaflet'
 import { CircleMarker } from 'react-leaflet'
 import MapContext from './MapContext'
+import { incrementCapacityCount } from './actions'
 
 const unselectedStyle = {
   stroke: 0
 }
 
 const selectedStyle = {
-  // className: 'selected',
   stroke: 1,
   weight: 5,
   color: '#6653ff',
   dashArray: 2
 }
+
 const updatePrisons = (prisons, item) => {
   return prisons.map(prison => {
     delete prison.selected
@@ -25,56 +27,59 @@ const updatePrisons = (prisons, item) => {
 }
 
 const MapIncidents = () => {
+  const dispatch = useDispatch()
   const { prisons, setPrisons, selectedPrison } = useContext(MapContext)
   const [prisonsAnimation, setPrisonsAnimation] = useState([])
-  const [clicked, setClicked] = useState()
-
   const circleMarkers = useRef([])
+  const count = useRef(1856)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (prisonsAnimation.length <= prisons.length) {
-        setPrisonsAnimation([...prisonsAnimation, prisons[prisonsAnimation.length]])
-      } else {
-        return () => clearInterval(interval)
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [prisonsAnimation, prisons])
-
-  useEffect(() => {
-    circleMarkers.current.map(element => {
-      if (element.options.className.includes(selectedPrison)) {
+  const selectCircleMarker = (id) => {
+    circleMarkers.current.forEach(element => {
+      if (element.options.className.includes(id)) {
         element.setStyle(selectedStyle)
       } else {
         element.setStyle(unselectedStyle)
       }
-      return ''
     })
+  }
+
+  useEffect(() => {
+    if (!prisons[0]) {
+      return
+    }
+    const interval = setInterval(() => {
+      if (count.current++ === prisons[prisonsAnimation.length].opened) {
+        dispatch(incrementCapacityCount(prisons[prisonsAnimation.length].capacity))
+        setPrisonsAnimation([...prisonsAnimation, prisons[prisonsAnimation.length]])
+        return ''
+      } else {
+        return () => clearInterval(interval)
+      }
+    }, 100)
+
+    return () => clearInterval(interval)
+  }, [prisonsAnimation, prisons, dispatch])
+
+  useEffect(() => {
+    selectCircleMarker(selectedPrison)
   }, [selectedPrison])
+
+  const handleMapIncidentClick = (e, item) => {
+    selectCircleMarker(item.id)
+    const update = updatePrisons(prisons, item)
+
+    setPrisons([...update])
+  }
+
+  const calculateRadius = (item) => {
+    const radius = 10 * Math.log(item.capacity / 50)
+
+    return radius
+  }
 
   const selectedClassName = (item) => {
     return (item.selected === 'selected') ? 'prison-capacity active ' + item.id : 'prison-capacity ' + item.id
   }
-
-  const handleMapIncidentClick = (e, item) => {
-    if (clicked) {
-      clicked.setStyle(unselectedStyle)
-    }
-
-    e.target.setStyle(selectedStyle)
-
-    setClicked(e.target)
-
-    const update = updatePrisons(prisons, item)
-
-    setPrisons([...update])
-
-    circleMarkers.current[10].setStyle(selectedStyle)
-  }
-
-  const calculateRadius = (item) => 20 * Math.log(item.capacity / 100)
 
   const createCircleMarker = (item, index) => {
     if (!item) {

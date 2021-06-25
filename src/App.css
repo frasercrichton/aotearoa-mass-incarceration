@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 /* 
 h1 {
   position: fixed;
@@ -28,8 +26,6 @@ z-index: 1;
   color: #61dafb;
 }
 
-
-
 .App .leaflet-container {
   height: 100%;
   width: 75%;
@@ -51,7 +47,7 @@ z-index: 1;
 
 .App .metrics-wrapper {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 9px ;
+  font-size: 10px;
   
   position: fixed;
   top: 0px;
@@ -60,7 +56,21 @@ z-index: 1;
 
   height: 100%;
   width: 25%;
+  cursor: pointer;
   /* background-color: #000000; */
+}
+
+.metrics-wrapper h1 {
+  text-align: center;
+}
+
+.metrics-wrapper .prison-list {
+  padding: 20px;
+}
+
+.metrics-wrapper p:hover {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .App .leaflet-container a {
@@ -76,7 +86,6 @@ z-index: 1;
   fill: #00cc00;
 
 }
-
 
 .metrics-wrapper .active {
   font-weight: bold;

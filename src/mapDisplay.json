@@ -14,9 +14,9 @@
         ]
     ],
     "zoom": {
-        "default": "5.75",
-        "active": "5.75",
-        "minZoomCityBlock": "5.75",
+        "default": "5.5",
+        "active": "5.5",
+        "minZoomCityBlock": "5.5",
         "maxZoomContinent": "10"
     }
 }

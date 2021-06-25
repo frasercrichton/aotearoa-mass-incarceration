@@ -1,14 +1,11 @@
 import React, { useContext } from 'react'
 import MapContext from './MapContext'
-
+ 
 const MapIncidents = () => {
   const { prisons, setPrisons, setSelectedPrison } = useContext(MapContext)
-
   const selectPrison = (item) => {
-    // rapper
-    // ReactDOM.findDOMNode(<instance-of-outermost-component>).getElementsByClassName('map-wrapper') // Returns the elements
-
     setSelectedPrison(item.id)
+
     const update = prisons.map(prison => {
       delete prison.selected
       if (prison.prisonName === item.prisonName) {
@@ -32,7 +29,7 @@ const MapIncidents = () => {
     return (
       <div key={item.prisonName}>
         <p onClick={() => selectPrison(item)} className={selectedClassName(item)}>
-          {item.correctionsName} ({item.opened}{hasClosedText(item)}) - {item.capacity}
+          {item.prisonName} ({item.opened}{hasClosedText(item)}) - <strong>{item.capacity}</strong>
         </p>
       </div>
     )
