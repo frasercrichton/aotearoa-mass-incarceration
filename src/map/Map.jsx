@@ -1,11 +1,10 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState } from 'react'
 import { LatLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import MapIncidents from './MapIncidents'
 import mapDisplay from './mapDisplay.json'
 import { useDispatch } from 'react-redux'
-import MapContext from './MapContext'
-import { incrementCapacityCount, updateCurrentDate } from './actions'
+import { resetDisplayPrisons } from '../actions'
 
 const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
 const MAP_LEAFLET_ID = process.env.REACT_APP_MAP_LEAFLET_ID
@@ -25,39 +24,14 @@ const mapZoomDimensions = {
 
 const Map = () => {
   const dispatch = useDispatch()
-
   const { mapZoom, maxZoom, minZoom, maxBounds, zoomSnap } = mapZoomDimensions
-  const { prisons } = useContext(MapContext)
-  const [prisonsAnimation, setPrisonsAnimation] = useState([])
-
-  const count = useRef(1856)
-
   const [playState, setPlayState] = useState(true)
 
   const playAnimation = () => {
-    if (!prisons[0]) {
-      return
-    }
-    const interval = setInterval(() => {
-      const incrementedCount = count.current++
-      if (incrementedCount <= prisons[prisons.length - 1].opened) {
-        dispatch(updateCurrentDate(count.current))
-      }
-      const currentPrison = prisons[prisonsAnimation.length]
-      if (incrementedCount === currentPrison.opened) {
-        dispatch(incrementCapacityCount(currentPrison.capacity))
-        setPrisonsAnimation([...prisonsAnimation, currentPrison])
-        return ''
-      } else {
-        return () => clearInterval(interval)
-      }
-    }, 100)
-
-    return () => clearInterval(interval)
+    dispatch(resetDisplayPrisons())
   }
 
   const play = () => {
-    //  disable on run
     setPlayState(!playState)
     playAnimation()
   }

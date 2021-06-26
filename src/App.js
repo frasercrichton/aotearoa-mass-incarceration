@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import * as d3 from 'd3'
 import './App.css'
-import Map from './Map'
+import Map from './map/Map'
 import Metrics from './Metrics'
 import MapContext from './MapContext'
-import * as d3 from 'd3'
-import { zoom, centre } from './mapDisplay.json'
+import { zoom, centre } from './map/mapDisplay.json'
 import { createPrison } from './domainAugment'
 import prisonMusterFile from './prisons.csv'
 import { capacityCountDomainState, currentDateDomainState } from './selectors'
@@ -21,7 +21,6 @@ function App () {
   }
 
   const [mapZoom, setMapZoom] = useState(mapDisplay)
-  const [selectedPrison, setSelectedPrison] = useState('')
   const setActiveZoom = (active) => { setMapZoom(active) }
 
   useEffect(() => {
@@ -33,7 +32,6 @@ function App () {
       })
       dispatch(updatePrisons(data))
     }).catch((error) => {
-      // TODO update for notifications error
       // eslint-disable-next-line no-console
       console.log(error)
     })

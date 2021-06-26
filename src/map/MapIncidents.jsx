@@ -2,8 +2,18 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LatLng } from 'leaflet'
 import { CircleMarker } from 'react-leaflet'
-import { incrementCapacityCount, updateCurrentDate, updateDisplayPrisons, updateSelectedPrison } from './actions'
-import { prisonsDomainState, domainState, selectedPrisonDomainState } from './selectors'
+import {
+  incrementCapacityCount,
+  incrementCurrentDate,
+  updateDisplayPrisons,
+  updateSelectedPrison
+} from '../actions'
+import {
+  prisonsDomainState,
+  domainState,
+  selectedPrisonDomainState,
+  currentDateDomainState
+} from '../selectors'
 
 const unselectedStyle = {
   stroke: 0
@@ -21,9 +31,9 @@ const MapIncidents = () => {
   const prisons = useSelector(prisonsDomainState)
   const { displayPrisons } = useSelector(domainState)
   const selectedPrison = useSelector(selectedPrisonDomainState)
+  const currentDate = useSelector(currentDateDomainState)
 
   const circleMarkers = useRef([])
-  const count = useRef(1856)
 
   const selectCircleMarker = (id) => {
     circleMarkers.current.forEach(element => {
@@ -36,17 +46,18 @@ const MapIncidents = () => {
   }
 
   useEffect(() => {
+    console.log('the other', prisons.length)
     if (!prisons.length > 0) {
       return
     }
+
     const interval = setInterval(() => {
-      const incrementedCount = count.current++
-      if (incrementedCount <= prisons[prisons.length - 1].opened) {
-        dispatch(updateCurrentDate(count.current))
+      if (currentDate <= prisons[prisons.length - 1].opened) {
+        dispatch(incrementCurrentDate())
       }
       const currentPrison = prisons[displayPrisons.length]
 
-      if (incrementedCount === currentPrison.opened) {
+      if (currentDate === currentPrison.opened) {
         dispatch(incrementCapacityCount(currentPrison.capacity))
         dispatch(updateDisplayPrisons(currentPrison))
         return ''
@@ -56,7 +67,7 @@ const MapIncidents = () => {
     }, 100)
 
     return () => clearInterval(interval)
-  }, [dispatch, displayPrisons.length, prisons])
+  }, [dispatch, displayPrisons.length, prisons, currentDate])
 
   useEffect(() => {
     selectCircleMarker(selectedPrison)

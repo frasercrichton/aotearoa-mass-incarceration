@@ -1,6 +1,7 @@
 import {
   INCREMENT_CAPACITY_COUNT,
-  UPDATE_CURRENT_DATE,
+  INCREMENT_CURRENT_DATE,
+  RESET_DISPLAY_PRISONS,
   UPDATE_DISPLAY_PRISONS,
   UPDATE_PRISONS,
   UPDATE_SELECTED_PRISON
@@ -19,21 +20,11 @@ const incrementCapacityCount = (state, action) => Object.assign({},
   { capacityCount: state.capacityCount + action.payload }
 )
 
-const updateCurrentDate = (state, action) => Object.assign({},
-  state,
-  { currentDate: action.payload }
-)
-
 const updateDisplayPrisons = (state, action) => {
-  console.log('action.payload', action.payload)
-  console.log('state.displayPrisons', state.displayPrisons)
-  const x = Object.assign({},
+  return Object.assign({},
     state,
     { displayPrisons: [...state.displayPrisons, action.payload] }
   )
-  console.log('state', x)
-
-  return x
 }
 
 const updatePrisons = (state, action) => Object.assign({},
@@ -50,29 +41,43 @@ const update = (prisons, id) => prisons.map(prison => {
 })
 
 const updateSelectedPrison = (state, action) => {
-  const x = Object.assign({},
+  return Object.assign({},
     state,
     {
       selectedPrison: action.payload,
       displayPrisons: update(state.displayPrisons, action.payload)
     }
   )
-  console.log('>>>>', x)
-  return x
 }
+
+const incrementCurrentDate = (state) => Object.assign({},
+  state,
+  { currentDate: ++state.currentDate }
+)
+
+const resetDisplayPrisons = (state) => Object.assign({},
+  state,
+  {
+    displayPrisons: [],
+    capacityCount: 0,
+    currentDate: 1860
+  }
+)
 
 const domain = (state = domainInitial, action) => {
   switch (action.type) {
     case INCREMENT_CAPACITY_COUNT:
       return incrementCapacityCount(state, action)
-    case UPDATE_CURRENT_DATE:
-      return updateCurrentDate(state, action)
+    case INCREMENT_CURRENT_DATE:
+      return incrementCurrentDate(state, action)
     case UPDATE_DISPLAY_PRISONS:
       return updateDisplayPrisons(state, action)
     case UPDATE_PRISONS:
       return updatePrisons(state, action)
     case UPDATE_SELECTED_PRISON:
       return updateSelectedPrison(state, action)
+    case RESET_DISPLAY_PRISONS:
+      return resetDisplayPrisons(state)
     default:
       return state
   }
