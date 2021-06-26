@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { LatLng } from 'leaflet'
 import { CircleMarker } from 'react-leaflet'
-import MapContext from './MapContext'
-import { incrementCapacityCount } from './actions'
+import { incrementCapacityCount, updateCurrentDate, updateDisplayPrisons, updateSelectedPrison } from './actions'
+import { prisonsDomainState, domainState, selectedPrisonDomainState } from './selectors'
 
 const unselectedStyle = {
   stroke: 0
@@ -16,20 +16,12 @@ const selectedStyle = {
   dashArray: 2
 }
 
-const updatePrisons = (prisons, item) => {
-  return prisons.map(prison => {
-    delete prison.selected
-    if (prison.prisonName === item.prisonName) {
-      prison.selected = 'selected'
-    }
-    return prison
-  })
-}
-
 const MapIncidents = () => {
   const dispatch = useDispatch()
-  const { prisons, setPrisons, selectedPrison } = useContext(MapContext)
-  const [prisonsAnimation, setPrisonsAnimation] = useState([])
+  const prisons = useSelector(prisonsDomainState)
+  const { displayPrisons } = useSelector(domainState)
+  const selectedPrison = useSelector(selectedPrisonDomainState)
+
   const circleMarkers = useRef([])
   const count = useRef(1856)
 
@@ -44,13 +36,19 @@ const MapIncidents = () => {
   }
 
   useEffect(() => {
-    if (!prisons[0]) {
+    if (!prisons.length > 0) {
       return
     }
     const interval = setInterval(() => {
-      if (count.current++ === prisons[prisonsAnimation.length].opened) {
-        dispatch(incrementCapacityCount(prisons[prisonsAnimation.length].capacity))
-        setPrisonsAnimation([...prisonsAnimation, prisons[prisonsAnimation.length]])
+      const incrementedCount = count.current++
+      if (incrementedCount <= prisons[prisons.length - 1].opened) {
+        dispatch(updateCurrentDate(count.current))
+      }
+      const currentPrison = prisons[displayPrisons.length]
+
+      if (incrementedCount === currentPrison.opened) {
+        dispatch(incrementCapacityCount(currentPrison.capacity))
+        dispatch(updateDisplayPrisons(currentPrison))
         return ''
       } else {
         return () => clearInterval(interval)
@@ -58,7 +56,7 @@ const MapIncidents = () => {
     }, 100)
 
     return () => clearInterval(interval)
-  }, [prisonsAnimation, prisons, dispatch])
+  }, [dispatch, displayPrisons.length, prisons])
 
   useEffect(() => {
     selectCircleMarker(selectedPrison)
@@ -66,9 +64,7 @@ const MapIncidents = () => {
 
   const handleMapIncidentClick = (e, item) => {
     selectCircleMarker(item.id)
-    const update = updatePrisons(prisons, item)
-
-    setPrisons([...update])
+    dispatch(updateSelectedPrison(item.id))
   }
 
   const calculateRadius = (item) => {
@@ -105,9 +101,12 @@ const MapIncidents = () => {
     )
   }
 
-  return prisonsAnimation.map((item, index) => {
+  const prisonList =
+  displayPrisons.map((item, index) => {
     return createCircleMarker(item, index)
   })
+
+  return prisonList
 }
 
 export default MapIncidents

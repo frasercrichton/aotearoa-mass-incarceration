@@ -14,6 +14,7 @@
         ]
     ],
     "zoom": {
+        "zoomSnap": "0.25",
         "default": "5.5",
         "active": "5.5",
         "minZoomCityBlock": "5.5",

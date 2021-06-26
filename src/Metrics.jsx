@@ -1,20 +1,13 @@
-import React, { useContext } from 'react'
-import MapContext from './MapContext'
- 
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { domainState } from './selectors'
+import { updateSelectedPrison } from './actions'
+
 const MapIncidents = () => {
-  const { prisons, setPrisons, setSelectedPrison } = useContext(MapContext)
+  const dispatch = useDispatch()
+  const { displayPrisons } = useSelector(domainState)
   const selectPrison = (item) => {
-    setSelectedPrison(item.id)
-
-    const update = prisons.map(prison => {
-      delete prison.selected
-      if (prison.prisonName === item.prisonName) {
-        prison.selected = 'selected'
-      }
-      return prison
-    })
-
-    setPrisons([...update])
+    dispatch(updateSelectedPrison(item.id))
   }
 
   const isClosedClassName = (item) => (item.closed !== 0) ? ' closed' : ''
@@ -25,7 +18,7 @@ const MapIncidents = () => {
 
   const hasClosedText = (item) => (item.closed !== 0) ? `-${item.closed}` : ''
 
-  return prisons.map((item) => {
+  return displayPrisons.map((item) => {
     return (
       <div key={item.prisonName}>
         <p onClick={() => selectPrison(item)} className={selectedClassName(item)}>
