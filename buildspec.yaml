@@ -22,8 +22,8 @@ phases:
       - yarn install
   pre_build:
     commands:
-      - echo Running tests . . .
-      - CI=true yarn test
+      - echo Mot Running tests . . .
+      # - CI=true yarn test
       - echo Tests complete
       
   build:
