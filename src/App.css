@@ -79,7 +79,7 @@ z-index: 1;
   right: 20px;
 }
 
-.metrics-wrapper h1 {
+.metrics-wrapper h1, h2 {
   text-align: center;
 }
 

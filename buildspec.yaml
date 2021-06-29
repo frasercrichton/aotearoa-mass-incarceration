@@ -29,11 +29,9 @@ phases:
   build:
     commands:
       - echo Checking Environment Variables
-      - echo cfdistid - $REACT_APP_MAP_LEAFLET_ID
       - echo ls
       
       - echo Starting build . . .
-      # - export BUCKET_PREFIX=$LAMBDA_PKG_BUCKET_PREFIX
       - yarn run build
 
 artifacts:

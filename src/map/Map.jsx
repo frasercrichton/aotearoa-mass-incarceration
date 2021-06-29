@@ -6,8 +6,8 @@ import mapDisplay from './mapDisplay.json'
 import { useDispatch } from 'react-redux'
 import { resetDisplayPrisons } from '../actions'
 
-const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
-const MAP_LEAFLET_ID = process.env.REACT_APP_MAP_LEAFLET_ID
+const MAP_LEAFLET_KEY = process.env.REACT_APP_DARK_MAP_LEAFLET_KEY
+const MAP_LEAFLET_ID = process.env.REACT_APP_DARK_MAP_LEAFLET_ID
 
 const { zoom, centre } = mapDisplay
 const mapCentre = new LatLng(
