@@ -19,19 +19,15 @@ phases:
     runtime-versions:
       nodejs: 14
     commands:
-      - echo printenv
+      - echo installing . . .
       - yarn install
   pre_build:
     commands:
-      - echo Mot Running tests . . .
+      - echo Not Running tests . . .
       # - CI=true yarn test
-      - echo Tests complete
       
   build:
     commands:
-      - echo Checking Environment Variables
-      - echo ls
-      
       - echo Starting build . . .
       - yarn run build
 
