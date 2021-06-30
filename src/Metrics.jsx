@@ -1,11 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { domainState } from './selectors'
+import { domainState, capacityCountDomainState, currentDateDomainState } from './selectors'
 import { updateSelectedPrison } from './actions'
 
 const MapIncidents = () => {
   const dispatch = useDispatch()
   const { displayPrisons } = useSelector(domainState)
+
+  const capacityCount = useSelector(capacityCountDomainState)
+  const currentDate = useSelector(currentDateDomainState)
+
   const selectPrison = (item) => {
     dispatch(updateSelectedPrison(item.id))
   }
@@ -18,7 +22,7 @@ const MapIncidents = () => {
 
   const hasClosedText = (item) => (item.closed !== 0) ? `-${item.closed}` : ''
 
-  return displayPrisons.map((item) => {
+  const list = displayPrisons.map((item) => {
     return (
       <div key={item.prisonName}>
         <p onClick={() => selectPrison(item)} className={selectedClassName(item)}>
@@ -27,6 +31,28 @@ const MapIncidents = () => {
       </div>
     )
   })
+
+  return (
+    <div className='metrics-wrapper'>
+      <h1>Mass Incarceration</h1>
+      <h2>{currentDate}</h2>
+      <h2>Population 2021: {capacityCount}</h2>
+      <div className='prison-list'>
+        {list}
+        <div className='references-wrapper'>
+          Department of Corrections figures:
+          <a
+            target='_blank'
+            rel='noreferrer'
+            href='https://www.corrections.govt.nz/resources/statistics/quarterly_prison_statistics'
+          >
+            Prison facts and statistics - March 2021
+          </a>
+        </div>
+      </div>
+    </div>
+
+  )
 }
 
 export default MapIncidents

@@ -56,17 +56,16 @@ const MapIncidents = () => {
       if (currentDate < endDate) {
         dispatch(incrementCurrentDate())
       }
-      const currentPrison = prisons[displayPrisons.length]
 
-      if (currentDate === currentPrison.opened) {
-        if (!currentPrison.closed) {
-          dispatch(incrementCapacityCount(currentPrison.capacity))
-        }
+      const prisonsOpened = prisons.filter(prison => (prison.opened === currentDate))
 
-        dispatch(updateDisplayPrisons(currentPrison))
-        return ''
-      } else {
-        return () => clearInterval(interval)
+      if (prisonsOpened) {
+        prisonsOpened.forEach(prison => {
+          if (!prison.closed) {
+            dispatch(incrementCapacityCount(prison.capacity))
+          }
+          dispatch(updateDisplayPrisons(prison))
+        })
       }
     }, 100)
     if (currentDate === endDate) {

@@ -82,8 +82,17 @@ z-index: 1;
   
 }
 
-.play-icon{
+.stats-wrapper {
+  z-index: 700;
+  position: fixed;
+  bottom: 50px;
+  right: 350px;
+  height: 200px;
+  width: 400px;
+background-color: #ccc;
+}
 
+.play-icon{
   padding-top: 4px
 }
 

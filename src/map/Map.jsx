@@ -6,7 +6,6 @@ import MapIncidents from './MapIncidents'
 import mapDisplay from './mapDisplay.json'
 import { resetDisplayPrisons, togglePlayState } from '../actions'
 import { playStateDomainState } from '../selectors'
-
 const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
 const MAP_LEAFLET_ID = process.env.REACT_APP_DARK_MAP_LEAFLET_ID
 
@@ -38,7 +37,7 @@ const Map = () => {
     }
   }
 
-  const playIcon = (playState) ?  'play_circle_filled' : 'play_circle_outline'
+  const playIcon = (playState) ? 'play_circle_filled' : 'play_circle_outline'
 
   return (
     <div className='map-wrapper'>
@@ -71,7 +70,6 @@ const Map = () => {
         />
         <MapIncidents />
       </MapContainer>
-
     </div>
   )
 }
