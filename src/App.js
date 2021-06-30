@@ -4,10 +4,8 @@ import * as d3 from 'd3'
 import './App.css'
 import Map from './map/Map'
 import Metrics from './Metrics'
-import MapContext from './MapContext'
-import { zoom, centre } from './map/mapDisplay.json'
 import { createPrison } from './domainAugment'
-import prisonMusterFile from './prisons.csv'
+import prisonMusterFile from './data/prisons.csv'
 import { capacityCountDomainState, currentDateDomainState } from './selectors'
 import { updatePrisons } from './actions'
 
@@ -15,13 +13,6 @@ function App () {
   const dispatch = useDispatch()
   const capacityCount = useSelector(capacityCountDomainState)
   const currentDate = useSelector(currentDateDomainState)
-  const mapDisplay = {
-    centre,
-    zoom: zoom.default
-  }
-
-  const [mapZoom, setMapZoom] = useState(mapDisplay)
-  const setActiveZoom = (active) => { setMapZoom(active) }
 
   useEffect(() => {
     d3.csv(prisonMusterFile, (facility) => {
@@ -39,32 +30,28 @@ function App () {
 
   return (
     <div className='App'>
-      <MapContext.Provider value={{
-        mapZoom,
-        setMapZoom: setActiveZoom
-      }}
-      >
-        <Map />
-        <div className='metrics-wrapper'>
-          <h1>Mass Incarceration</h1>
-          <h2>
-            {currentDate} Capacity: {capacityCount}
-          </h2>
-          <div className='prison-list'>
-            <Metrics />
-            <div className='references-wrapper'>
-              Department of Corrections figures:
-              <a
-                target='_blank'
-                rel='noreferrer'
-                href='https://www.corrections.govt.nz/resources/statistics/quarterly_prison_statistics'
-              >
-                Prison facts and statistics - March 2021
-              </a>
-            </div>
+      <Map />
+      <div className='metrics-wrapper'>
+        <h1>Mass Incarceration</h1>
+        <h2>{currentDate}</h2>
+
+        <h2>
+          Population 2021: {capacityCount}
+        </h2>
+        <div className='prison-list'>
+          <Metrics />
+          <div className='references-wrapper'>
+            Department of Corrections figures:
+            <a
+              target='_blank'
+              rel='noreferrer'
+              href='https://www.corrections.govt.nz/resources/statistics/quarterly_prison_statistics'
+            >
+              Prison facts and statistics - March 2021
+            </a>
           </div>
         </div>
-      </MapContext.Provider>
+      </div>
     </div>
   )
 }

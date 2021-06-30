@@ -4,7 +4,8 @@ import {
   RESET_DISPLAY_PRISONS,
   UPDATE_DISPLAY_PRISONS,
   UPDATE_PRISONS,
-  UPDATE_SELECTED_PRISON
+  UPDATE_SELECTED_PRISON,
+  TOGGLE_PLAY_STATE
 } from '../actions'
 
 const domainInitial = {
@@ -12,7 +13,8 @@ const domainInitial = {
   displayPrisons: [],
   capacityCount: 0,
   currentDate: 1860,
-  selectedPrison: ''
+  selectedPrison: '',
+  playState: true
 }
 
 const incrementCapacityCount = (state, action) => Object.assign({},
@@ -64,6 +66,11 @@ const resetDisplayPrisons = (state) => Object.assign({},
   }
 )
 
+const togglePlayState = (state) => Object.assign({},
+  state,
+  { playState: !state.playState }
+)
+
 const domain = (state = domainInitial, action) => {
   switch (action.type) {
     case INCREMENT_CAPACITY_COUNT:
@@ -78,6 +85,8 @@ const domain = (state = domainInitial, action) => {
       return updateSelectedPrison(state, action)
     case RESET_DISPLAY_PRISONS:
       return resetDisplayPrisons(state)
+    case TOGGLE_PLAY_STATE:
+      return togglePlayState(state)
     default:
       return state
   }

@@ -32,3 +32,8 @@ export const RESET_DISPLAY_PRISONS = 'RESET_DISPLAY_PRISONS'
 export const resetDisplayPrisons = () => ({
   type: RESET_DISPLAY_PRISONS
 })
+
+export const TOGGLE_PLAY_STATE = 'TOGGLE_PLAY_STATE'
+export const togglePlayState = () => ({
+  type: TOGGLE_PLAY_STATE
+})

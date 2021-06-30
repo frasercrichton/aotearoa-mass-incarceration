@@ -62,24 +62,40 @@ z-index: 1;
 .App .play-icon-wrapper {
   position: fixed;
   top: 80px;
-  left: 14px;
+  left: 13px;
   z-index: 700;
-}
-
-.play-icon {
-  text-align: center;
+  cursor: pointer;
   width: 30px;
   height: 30px;
   line-height: 30px;
   font-size: 22px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  text-decoration: none;
+  font: bold 18px "Lucida Console", Monaco, monospace;
+  text-align: center;
+  
 }
+
+.play-icon{
+
+  padding-top: 4px
+}
+
 .references-wrapper {
   position: fixed;
   bottom: 30px;
   right: 20px;
+  width: 300px;
 }
 
-.metrics-wrapper h1, h2 {
+.metrics-wrapper h1,
+h2 {
   text-align: center;
 }
 

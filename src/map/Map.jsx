@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { LatLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
+import { useDispatch, useSelector } from 'react-redux'
 import MapIncidents from './MapIncidents'
 import mapDisplay from './mapDisplay.json'
-import { useDispatch } from 'react-redux'
-import { resetDisplayPrisons } from '../actions'
+import { resetDisplayPrisons, togglePlayState } from '../actions'
+import { playStateDomainState } from '../selectors'
 
 const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
 const MAP_LEAFLET_ID = process.env.REACT_APP_DARK_MAP_LEAFLET_ID
@@ -25,32 +26,33 @@ const mapZoomDimensions = {
 const Map = () => {
   const dispatch = useDispatch()
   const { mapZoom, maxZoom, minZoom, maxBounds, zoomSnap } = mapZoomDimensions
-  const [playState, setPlayState] = useState(true)
-
+  const playState = useSelector(playStateDomainState)
   const playAnimation = () => {
     dispatch(resetDisplayPrisons())
   }
 
   const play = () => {
-    setPlayState(!playState)
-    playAnimation()
+    if (!playState) {
+      dispatch(togglePlayState())
+      playAnimation()
+    }
   }
 
-  const playIcon = (playState) ? 'play_circle_outline' : 'play_circle_filled'
+  const playIcon = (playState) ?  'play_circle_filled' : 'play_circle_outline'
 
   return (
     <div className='map-wrapper'>
       <div className='play-icon-wrapper'>
-        <button
+        <a
           className='material-icons play-icon material-icons-outlined'
           onClick={() => play()}
         >
           {playIcon}
-        </button>
+        </a>
       </div>
       <MapContainer
       // onMoveend={this.displayMarkers}
-        // fitBounds={maxBounds}
+        fitBounds={maxBounds}
         maxBounds={maxBounds}
         center={mapCentre}
         zoomSnap={zoomSnap}

@@ -6,7 +6,8 @@ import {
   incrementCapacityCount,
   incrementCurrentDate,
   updateDisplayPrisons,
-  updateSelectedPrison
+  updateSelectedPrison,
+  togglePlayState
 } from '../actions'
 import {
   prisonsDomainState,
@@ -44,28 +45,33 @@ const MapIncidents = () => {
       }
     })
   }
+  const endDate = 2021
 
   useEffect(() => {
-    console.log('the other', prisons.length)
     if (!prisons.length > 0) {
       return
     }
-
+    // same year
     const interval = setInterval(() => {
-      if (currentDate <= prisons[prisons.length - 1].opened) {
+      if (currentDate < endDate) {
         dispatch(incrementCurrentDate())
       }
       const currentPrison = prisons[displayPrisons.length]
 
       if (currentDate === currentPrison.opened) {
-        dispatch(incrementCapacityCount(currentPrison.capacity))
+        if (!currentPrison.closed) {
+          dispatch(incrementCapacityCount(currentPrison.capacity))
+        }
+
         dispatch(updateDisplayPrisons(currentPrison))
         return ''
       } else {
         return () => clearInterval(interval)
       }
     }, 100)
-
+    if (currentDate === endDate) {
+      dispatch(togglePlayState())
+    }
     return () => clearInterval(interval)
   }, [dispatch, displayPrisons.length, prisons, currentDate])
 

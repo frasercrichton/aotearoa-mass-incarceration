@@ -8,4 +8,5 @@ export const currentDateDomainState = state => state.domain.currentDate
 
 export const selectedPrisonDomainState = state => state.domain.selectedPrison
 
+export const playStateDomainState = state => state.domain.playState
 export const domainState = state => state.domain
