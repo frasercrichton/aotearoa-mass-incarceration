@@ -1,23 +1,17 @@
 {
-    "centre": {
-        "latitude": -40.7670087,
-        "longitude": 173.4506545
-    },
-    "maxBounds": [
-        [
-            -40.7670087,
-            173.450654
-        ],
-        [
-            -40.7670087,
-            173.450654
-        ]
-    ],
-    "zoom": {
-        "zoomSnap": "0.25",
-        "default": "5.5",
-        "active": "5.5",
-        "minZoomCityBlock": "5.5",
-        "maxZoomContinent": "10"
-    }
+  "centre": {
+    "latitude": -40.7670087,
+    "longitude": 173.4506545
+  },
+  "maxBounds": {
+    "southWest": [-45.59589790007943, 157.09106084377453],
+    "northEast": [-35.574503782518356, 189.78093879433226]
+  },
+  "zoom": {
+    "zoomSnap": "0.25",
+    "default": "5.5",
+    "active": "5.5",
+    "minZoomCityBlock": "5.5",
+    "maxZoomContinent": "10"
+  }
 }

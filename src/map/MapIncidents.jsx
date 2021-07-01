@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LatLng } from 'leaflet'
-import { CircleMarker } from 'react-leaflet'
+import { CircleMarker, useMap } from 'react-leaflet'
 import {
   incrementCapacityCount,
   incrementCurrentDate,
@@ -33,8 +33,12 @@ const MapIncidents = () => {
   const { displayPrisons } = useSelector(domainState)
   const selectedPrison = useSelector(selectedPrisonDomainState)
   const currentDate = useSelector(currentDateDomainState)
-
   const circleMarkers = useRef([])
+
+  const map = useMap()
+
+  console.log('x', map.getBounds())
+
 
   const selectCircleMarker = (id) => {
     circleMarkers.current.forEach(element => {

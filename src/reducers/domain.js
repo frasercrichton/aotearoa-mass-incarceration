@@ -62,7 +62,8 @@ const resetDisplayPrisons = (state) => Object.assign({},
   {
     displayPrisons: [],
     capacityCount: 0,
-    currentDate: 1860
+    currentDate: 1860,
+  //  selectedPrison selectedPrison: ''
   }
 )
 

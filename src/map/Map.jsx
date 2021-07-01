@@ -1,5 +1,5 @@
 import React from 'react'
-import { LatLng } from 'leaflet'
+import { LatLng, LatLngBounds } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
 import MapIncidents from './MapIncidents'
@@ -9,7 +9,7 @@ import { playStateDomainState } from '../selectors'
 const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
 const MAP_LEAFLET_ID = process.env.REACT_APP_DARK_MAP_LEAFLET_ID
 
-const { zoom, centre } = mapDisplay
+const { zoom, centre, maxBounds } = mapDisplay
 const mapCentre = new LatLng(
   centre.latitude,
   centre.longitude
@@ -24,8 +24,13 @@ const mapZoomDimensions = {
 
 const Map = () => {
   const dispatch = useDispatch()
-  const { mapZoom, maxZoom, minZoom, maxBounds, zoomSnap } = mapZoomDimensions
+  const { mapZoom, maxZoom, minZoom, zoomSnap } = mapZoomDimensions
   const playState = useSelector(playStateDomainState)
+
+  const southWest = new LatLng(maxBounds.southWest[0], maxBounds.southWest[1])
+  const northEast = new LatLng(maxBounds.northEast[0], maxBounds.northEast[1])
+  const bounds = new LatLngBounds(southWest, northEast)
+
   const playAnimation = () => {
     dispatch(resetDisplayPrisons())
   }
@@ -51,14 +56,17 @@ const Map = () => {
       </div>
       <MapContainer
       // onMoveend={this.displayMarkers}
-        fitBounds={maxBounds}
-        maxBounds={maxBounds}
         center={mapCentre}
         zoomSnap={zoomSnap}
         zoom={mapZoom}
         maxZoom={maxZoom}
         minZoom={minZoom}
+        touchZoom={false}
+        scrollWheelZoom={false}
+        maxBounds={bounds}
+        fitBounds={maxBounds}
       >
+
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/${MAP_LEAFLET_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${MAP_LEAFLET_KEY}&fresh=true`}
           attribution='Map data &copy;

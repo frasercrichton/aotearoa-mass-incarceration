@@ -1,15 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { domainState, capacityCountDomainState, currentDateDomainState } from './selectors'
+import { domainState, capacityCountDomainState, currentDateDomainState, selectedPrison } from './selectors'
 import { updateSelectedPrison } from './actions'
 
 const MapIncidents = () => {
   const dispatch = useDispatch()
   const { displayPrisons } = useSelector(domainState)
-
   const capacityCount = useSelector(capacityCountDomainState)
   const currentDate = useSelector(currentDateDomainState)
-
   const selectPrison = (item) => {
     dispatch(updateSelectedPrison(item.id))
   }
@@ -24,11 +22,15 @@ const MapIncidents = () => {
 
   const list = displayPrisons.map((item) => {
     return (
-      <div key={item.prisonName}>
-        <p onClick={() => selectPrison(item)} className={selectedClassName(item)}>
-          {item.prisonName} ({item.opened}{hasClosedText(item)}) - <strong>{item.capacity}</strong>
-        </p>
-      </div>
+      <tr key={item.prisonName} className={selectedClassName(item)}>
+        <td onClick={() => selectPrison(item)}>
+          {item.prisonName}({item.opened}{hasClosedText(item)})
+
+        </td>
+        <td align='right'>          {!item.closed &&
+          <strong>{item.capacity}</strong>}
+        </td>
+      </tr>
     )
   })
 
@@ -36,9 +38,20 @@ const MapIncidents = () => {
     <div className='metrics-wrapper'>
       <h1>Mass Incarceration</h1>
       <h2>{currentDate}</h2>
-      <h2>Population 2021: {capacityCount}</h2>
       <div className='prison-list'>
-        {list}
+        <table width='100%'>
+          <thead>
+            <tr>
+              <th align='left' className='prison-header'>Prison</th>
+              <th align='right' className='capacity-header'>Current Capacity</th>
+            </tr>
+          </thead>
+          {list}
+          <tr className='population-footer'>
+            <td>Total Population:</td>
+            <td align='right'>{capacityCount}</td>
+          </tr>
+        </table>
         <div className='references-wrapper'>
           Department of Corrections figures:
           <a
