@@ -38,7 +38,7 @@ const Map = () => {
   const play = () => {
     if (!playState) {
       dispatch(togglePlayState())
-      playAnimation()
+      setTimeout(() => { playAnimation() }, 1000)
     }
   }
 

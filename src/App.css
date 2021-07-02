@@ -4,7 +4,7 @@
 
 .App .leaflet-container {
   height: 100%;
-  width: 75%;
+  width: 70%;
   background-color: #000000;
 }
 
@@ -28,7 +28,7 @@
   bottom: 0px;
   right: 0px;
   height: 100%;
-  width: 25%;
+  width: 30%;
 }
 
 .App .play-icon-wrapper {
@@ -39,15 +39,12 @@
 
   height: 15px;
   line-height: 15px;
-
   padding-top: 7px;
   padding-bottom: 6px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-
   background-color: #fff;
   text-align: center;
   text-decoration: none;
