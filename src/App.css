@@ -1,14 +1,3 @@
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(8px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -29,7 +18,7 @@
   bottom: 0px;
   left: 0px;
   right: 0;
- }
+}
 
 .App .metrics-wrapper {
   font-family: "Courier New", Courier, monospace;
@@ -40,30 +29,42 @@
   right: 0px;
   height: 100%;
   width: 25%;
-  cursor: pointer;
-  /* background-color: #000000; */
 }
 
 .App .play-icon-wrapper {
   position: fixed;
-  top: 80px;
-  left: 13px;
+  top: 79px;
+  left: 12px;
   z-index: 700;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 22px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+
+  height: 15px;
+  line-height: 15px;
+
+  padding-top: 7px;
+  padding-bottom: 6px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
   text-align: center;
   text-decoration: none;
   font: bold 18px "Lucida Console", Monaco, monospace;
   text-align: center;
+}
+
+.play-icon {
+  overflow: unset;
+  width: 30px;
+  height: 14px;
+  line-height: 14px;
+  background-color: #fff;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
 }
 
 .stats-wrapper {
@@ -74,10 +75,6 @@
   height: 200px;
   width: 400px;
   background-color: #ccc;
-}
-
-.play-icon {
-  padding-top: 4px;
 }
 
 .references-wrapper {
@@ -91,7 +88,6 @@
   text-align: center;
   color: #6653ff;
 }
-
 
 .metrics-wrapper h2 {
   text-align: center;
@@ -133,26 +129,34 @@ th .prison-header {
   font-weight: bold;
 }
 
-.references-wrapper, 
-.population-footer td:hover, h1, h2, th {
+.references-wrapper,
+.population-footer td:hover,
+h1,
+h2,
+th {
   cursor: text;
 }
 
 .population-footer td:hover {
   text-decoration: none;
- }
-
+}
 
 @media only screen and (max-width: 768px) {
   .metrics-wrapper {
     visibility: none;
     display: none;
   }
+
+  .metrics-wrapper h1 {
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    z-index: 700;
+    visibility: visible;
+    display: block;
+  }
 }
-
-
-
- /* For desktop: */
+/* For desktop: */
 /* .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}

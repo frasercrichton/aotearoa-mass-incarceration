@@ -47,12 +47,12 @@ const Map = () => {
   return (
     <div className='map-wrapper'>
       <div className='play-icon-wrapper'>
-        <a
+        <button
           className='material-icons play-icon material-icons-outlined'
           onClick={() => play()}
         >
           {playIcon}
-        </a>
+        </button>
       </div>
       <MapContainer
       // onMoveend={this.displayMarkers}
@@ -65,6 +65,7 @@ const Map = () => {
         scrollWheelZoom={false}
         maxBounds={bounds}
         fitBounds={maxBounds}
+        attributionControl={false}
       >
 
         <TileLayer

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { domainState, capacityCountDomainState, currentDateDomainState, selectedPrison } from './selectors'
+import { domainState, capacityCountDomainState, currentDateDomainState } from './selectors'
 import { updateSelectedPrison } from './actions'
 
 const MapIncidents = () => {
@@ -46,11 +46,13 @@ const MapIncidents = () => {
               <th align='right' className='capacity-header'>Current Capacity</th>
             </tr>
           </thead>
-          {list}
-          <tr className='population-footer'>
-            <td>Total Population:</td>
-            <td align='right'>{capacityCount}</td>
-          </tr>
+          <tbody>
+            {list}
+            <tr className='population-footer'>
+              <td>Total Population:</td>
+              <td align='right'>{capacityCount}</td>
+            </tr>
+          </tbody>
         </table>
         <div className='references-wrapper'>
           Department of Corrections figures:
