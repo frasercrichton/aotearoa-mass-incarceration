@@ -36,8 +36,10 @@ const MapIncidents = () => {
 
   return (
     <div className='metrics-wrapper'>
-      <h1>Mass Incarceration</h1>
-      <h2>{currentDate}</h2>
+      <div className='header'>
+        <h1>Mass Incarceration</h1>
+        <h2>{currentDate}</h2>
+      </div>
       <div className='prison-list'>
         <table width='100%'>
           <thead>
