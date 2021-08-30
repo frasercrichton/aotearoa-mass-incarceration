@@ -1,3 +1,6 @@
+import prisons from '../data/prisons.json'
+import { createPrison } from './domainAugment'
+
 import {
   INCREMENT_CAPACITY_COUNT,
   INCREMENT_CURRENT_DATE,
@@ -9,10 +12,10 @@ import {
 } from '../actions'
 
 const domainInitial = {
-  prisons: [],
+  prisons: prisons.map(prison => createPrison(prison)).sort((a, b) => a.opened > b.opened ? 1 : -1),
   displayPrisons: [],
   capacityCount: 0,
-  currentDate: 1860,
+  currentDate: 1900,
   selectedPrison: '',
   playState: true
 }
@@ -62,8 +65,7 @@ const resetDisplayPrisons = (state) => Object.assign({},
   {
     displayPrisons: [],
     capacityCount: 0,
-    currentDate: 1860,
-  //  selectedPrison selectedPrison: ''
+    currentDate: 1900
   }
 )
 

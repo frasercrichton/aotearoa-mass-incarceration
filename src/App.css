@@ -79,6 +79,8 @@
   bottom: 30px;
   right: 20px;
   width: 350px;
+  padding: 10px;
+  background-color: #ccc;
 }
 
 .metrics-wrapper h1 {
@@ -112,6 +114,14 @@
 
 .metrics-wrapper .active {
   font-weight: bold;
+}
+
+.decade td {
+  border-top: 1px solid #ccc;
+}
+
+.decade td {
+   padding-top: 20px; 
 }
 
 .metrics-wrapper .closed {

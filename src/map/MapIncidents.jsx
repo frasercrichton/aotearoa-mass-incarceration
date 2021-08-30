@@ -82,11 +82,7 @@ const MapIncidents = () => {
     dispatch(updateSelectedPrison(item.id))
   }
 
-  const calculateRadius = (item) => {
-    const radius = 10 * Math.log(item.capacity / 50)
-
-    return radius
-  }
+  const calculateRadius = (item) => 10 * Math.log(item.capacity / 50)
 
   const selectedClassName = (item) => {
     return (item.selected === 'selected') ? 'prison-capacity active ' + item.id : 'prison-capacity ' + item.id
