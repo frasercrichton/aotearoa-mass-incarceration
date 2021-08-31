@@ -7,31 +7,20 @@ import {
 } from './selectors'
 import { updateSelectedPrison } from './actions'
 
-const getFullDecade = (item) => {
-  return (Math.floor(Number(item) / 10) * 10)
-}
 const hasClosedText = (item) => (item.closed !== 0) ? `-${item.closed}` : ''
 
 const isClosedClassName = (item) => (item.closed !== 0) ? ' closed' : ''
 
 const MapIncidents = () => {
   const dispatch = useDispatch()
-  const { displayPrisons, prisons } = useSelector(domainState)
+  const { displayPrisons } = useSelector(domainState)
   const capacityCount = useSelector(capacityCountDomainState)
   const currentDate = useSelector(currentDateDomainState)
   const selectPrison = (item) => {
     dispatch(updateSelectedPrison(item.id))
   }
-  const decades = prisons.map(prison => getFullDecade(prison.opened))
-console.log('state')
   const selectedClassName = (item) => {
-    const decade = getFullDecade(item.opened)
-    decades.pop(decade)
-    // console.log('decades: ', decades.map(item => decade).length)
-
-    const decadeMarker = decades.map(item => decade).length > 0 ? '' : 'decade'
-    const className = (item.selected) ? 'prison-details active ' + item.prisonName + isClosedClassName(item) : 'prison-details ' + item.prisonName + isClosedClassName(item)
-    return `${className} ${decadeMarker}`
+    return (item.selected) ? 'prison-details active ' + item.prisonName + isClosedClassName(item) : 'prison-details ' + item.prisonName + isClosedClassName(item)
   }
 
   const list = displayPrisons.map((item) => {
