@@ -35,6 +35,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "standard": "^16.0.3"
+    "standard": "^16.0.4"
   }
 }
