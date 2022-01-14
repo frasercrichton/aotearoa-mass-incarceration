@@ -11,7 +11,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.2",
-    "react-redux": "^7.2.5",
+    "react-redux": "^7.2.6",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
     "topojson-client": "^3.1.0",
