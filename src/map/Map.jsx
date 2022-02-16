@@ -6,8 +6,8 @@ import MapIncidents from './MapIncidents'
 import mapDisplay from './mapDisplay.json'
 import { resetDisplayPrisons, togglePlayState } from '../actions'
 import { playStateDomainState } from '../selectors'
-const MAP_LEAFLET_KEY = process.env.REACT_APP_MAP_LEAFLET_KEY
-const MAP_LEAFLET_ID = process.env.REACT_APP_DARK_MAP_LEAFLET_ID
+const MAP_BOX_KEY = process.env.REACT_APP_MASS_INCARCERATION_MAP_BOX_KEY
+const MAP_BOX_STYLE_ID = process.env.REACT_APP_MASS_INCARCERATION_MAP_BOX_STYLE_ID
 
 const { zoom, centre, maxBounds } = mapDisplay
 const mapCentre = new LatLng(
@@ -67,9 +67,8 @@ const Map = () => {
         fitBounds={maxBounds}
         attributionControl={false}
       >
-
         <TileLayer
-          url={`https://api.mapbox.com/styles/v1/${MAP_LEAFLET_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${MAP_LEAFLET_KEY}&fresh=true`}
+          url={`https://api.mapbox.com/styles/v1/${MAP_BOX_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${MAP_BOX_KEY}&fresh=true`}
           attribution='Map data &copy;
           <a target="_blank" rel="noreferrer" href="https://www.openstreetmap.org/">OpenStreetMap</a>
           contributors,
