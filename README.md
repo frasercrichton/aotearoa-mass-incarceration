@@ -1,5 +1,6 @@
 # Aotearoa Mass Incarceration
 
+<img width="811" alt="Screen Shot 2022-04-11 at 10 37 27 PM" src="https://user-images.githubusercontent.com/52700324/162723511-b3f6cfb3-71ff-4857-a39a-d7f59517ed72.png">
 
 
 ## Environment Variables
@@ -8,15 +9,6 @@
 REACT_APP_MASS_INCARCERATION_MAP_BOX_KEY      = "pk.yourkey"
 REACT_APP_MASS_INCARCERATION_MAP_BOX_STYLE_ID = "mapbox://styles/username/styleid"
 ```
-
-## Getting Started with Create React App
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `yarn start`
 
